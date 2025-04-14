@@ -84,7 +84,7 @@ function saveCharacterSetPreference(value) {
 function getRandomKana() {
   let newKana;
   let attempts = 0;
-  const maxAttempts = 10; // Safeguard against infinite loop
+  const maxAttempts = 10;
   const characterSet = document.getElementById('character-set').value;
 
   do {
@@ -103,10 +103,9 @@ function getRandomKana() {
     newKana = kanaSet[row][col];
     currentPronunciation = gojuon.pronunciation[row][col];
     attempts++;
-  } while (newKana === previousKana && attempts < maxAttempts);
+  } while (newKana === currentKana && attempts < maxAttempts);
 
-  // Update previous and current kana
-  previousKana = currentKana;
+  // No need to track previousKana anymore since we're comparing with currentKana
   currentKana = newKana;
   
   return currentKana;
